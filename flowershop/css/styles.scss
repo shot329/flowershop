@@ -1,0 +1,548 @@
+*,*::before, *::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #2b2b2b;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #2b2b2b;
+  text-decoration: none;
+}
+
+section {
+  text-align: center;
+}
+
+//★「.header__menu__item」の左に不明なpaddingがあった。
+//↓ これを指定することで、解決。
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+// utility
+.u-content-wrapper {
+  max-width: 960px;//最大幅を統一。
+  margin: 0 auto;
+}
+.u-heading {
+  position: relative;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  font-size: 36px;
+  letter-spacing: 2px;
+}
+.u-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 40px;
+  height: 1px;
+  background: #2b2b2b;
+  transform: translateX(-50%);
+}
+.u-text {
+  padding-bottom: 40px;
+  line-height: 1.8;
+  letter-spacing: 1.4px;
+}
+
+// ヘッダー
+.header {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  background: linear-gradient(rgba(0, 0, 0, 0.2),
+  rgba(0, 0, 0, 0.2)), url('../image/header.png');
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  font-family: myriad-pro, sans-serif;
+  .header__nav {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    .header__nav__wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .header__nav__logo {
+        font-size: 36px;
+      }
+      .hamburger-menu {
+        position: relative;
+        width: 32px;
+        height: 64px;
+        cursor: pointer;
+        .hamburger-menu__line,
+        .hamburger-menu__line::before,
+        .hamburger-menu__line::after,
+        .hamburger-menu__line--dummy {
+          position: absolute;
+          left: 0;
+          display: block;
+          width: 32px;
+          height: 1px;
+          background: #fff;
+        }
+        .hamburger-menu__line::before,
+        .hamburger-menu__line::after {
+          content: '';
+        }
+        .hamburger-menu__line,
+        .hamburger-menu__line--dummy {
+          top: 50%;
+          transition: all .3s;
+        }
+        .hamburger-menu__line::before {
+          top: calc(50% - 8px);
+          transition: all .3s;
+        }
+        .hamburger-menu__line::after {
+          top: calc(50% + 8px);
+          transition: all .3s;
+        }
+      }
+      .active {
+        .hamburger-menu__line {
+          transform: rotate(45deg);
+        }
+        .hamburger-menu__line--dummy {
+          transform: rotate(-45deg);
+        }
+        .hamburger-menu__line::before,
+        .hamburger-menu__line::after {
+          top: 50%;
+          opacity: 0;
+        }
+      }
+    }
+  }
+  .position-change {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+  }
+  .color-change {
+    color: #2b2b2b;
+    background: #fff;
+    border-bottom: 1px solid #a0a0a0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    .header__nav__wrapper {
+      .header-menu {
+        .hamburger-menu__line span,
+        .hamburger-menu__line span::before,
+        .hamburger-menu__line span::after,
+        .hamburger-menu__line--dummy {
+          background: #2b2b2b;
+        }
+      }
+    }
+  }
+  .header-menu {
+    position: fixed;//★ absoluteから変更。
+    top: 90px;//デフォルト64px
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: 0;
+    display: flex;
+    // display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .9);
+    transition: all .3s;
+    .header__menu__item {
+      padding: 0;
+      line-height: 11vh;
+      text-align: center;
+      font-size: 18px;
+      border-top: 1px solid #ccc;
+    }
+    .header__menu__item:last-of-type {
+      border-bottom: 1px solid #ccc;
+    }
+  }
+  .height-change {
+    height: calc(100vh - 64px);
+    // display: block;
+  }
+  
+  .header__title {
+    padding-top: 240px;
+    font-size: 120px;
+    font-weight: normal;
+  }
+  .header__title__sub {
+    word-spacing: 4px;//単語同士の間の長さ指定。
+  }
+  .header__title__sub::before,
+  .header__title__sub::after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 2px;
+    margin: 0 8px;
+    background: #fff;
+    vertical-align: middle;
+  }
+}
+.header .color-change .header__nav__wrapper .hamburger-menu .hamburger-menu__line,
+        .header .color-change .header__nav__wrapper .hamburger-menu .hamburger-menu__line::before,
+        .header .color-change .header__nav__wrapper .hamburger-menu .hamburger-menu__line::after,
+        .header .color-change .header__nav__wrapper .hamburger-menu .hamburger-menu__line--dummy {
+         
+          background: #2b2b2b; }
+
+// コンセプト
+.concept {
+  width: 100%;//背景色を整えるために必要。
+  padding: 80px 0;
+  background: linear-gradient(#fff 70%, #ededed 30%);//色の分布を指定できる！
+  .concept__image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;//★他の画像で試してみる。
+  }
+}
+
+// ワーク
+.work {
+  width: 100%;
+  padding-top: 80px;
+  .work__contents {
+    display: flex;// 子要素を横並び。
+    flex-direction: column;//縦方向に並べる。
+    flex-wrap: wrap;//折り返し
+    align-content: space-between;//複数行にした時の揃え。
+    height: 1680px;
+    .work__content {
+      width: 420px;
+      padding-bottom: 80px;
+      text-align: left;
+      line-height: 1.8;
+      .work__content__image {
+        width: 100%;
+        margin-bottom: 16px;
+      }
+      .work__content__heading {
+        font-size: 24px;
+      }
+      .work__content__text {
+        letter-spacing: 1.5px;
+      }
+    }
+    .work__content:nth-of-type(1) {order: 1;}
+      .work__content:nth-of-type(2) {
+        order: 3;
+        margin-top: 120px;
+      }
+      .work__content:nth-of-type(3) {order: 2;}
+      .work__content:nth-of-type(4) {order: 4;}
+  }
+}
+
+// florist
+.florist {
+  width: 100%;
+  padding-top: 80px;
+  background: linear-gradient(#ededed 60%, #fff 40%);
+  .florist__persons {
+    display: flex;
+    justify-content: space-between;
+    .florist__person {
+      width: 300px;
+      padding-bottom: 40px;
+      text-align: left;
+      line-height: 1.8;
+      font-size: 0;
+      .florist__person__image {
+        width: 100%;
+        margin-bottom: 12px;
+      }
+      .florist__person__name {
+        font-size: 24px;
+      }
+      .florist__person__introduce {
+        font-size: 16px;
+        letter-spacing: 1.5px;
+      }
+    }
+  }
+}
+
+// shop information
+.shopInformation {
+  width: 100%;
+  padding: 80px 0 120px;
+  .shopInformation__contents {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .shopInformation__image {
+      width: 50%;
+    }
+    .shopInformation__table {
+      width: 45%;
+      border-spacing: 16px;//★
+      text-align: left;
+      letter-spacing: 1.5px;
+      line-height: 2;//★
+      .shopInformation__table__heading {
+        width: 25%;
+        border-right: 1px solid #a0a0a0;
+      }
+    }
+  }
+}
+
+.contactUs {
+  width: 100%;
+  padding: 80px 0;
+  background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('../image/contact_us.png');
+  background-size: cover;
+  .btn__contact {
+    position: relative;
+    display: inline-block;//インライン要素のままだと高さ指定できたいため。
+    width: 360px;
+    padding-left: 40px;//メールのアイコンを入れるための空白。
+    height: 80px;
+    line-height: 80px;
+    letter-spacing: 2px;
+    border: 1px solid #a0a0a0;
+    background: #fff;
+    font-size: 20px;
+  }
+  .btn__contact::before,
+  .btn__contact::after {
+    content: '';
+    position: absolute;
+    border-radius: 2px;
+  }
+  // □を作る。
+  .btn__contact::before {
+    top: 30px;
+    left: 85px;
+    width: 30px;
+    height: 20px;
+    border: 1px solid #2b2b2b;
+  }
+  // 中身のⅤを作る。
+  .btn__contact::after {
+    top: 21px;
+    left: 90px;
+    width: 20px;
+    height: 20px;
+    border-right: 1px solid #2b2b2b;
+    border-bottom: 1px solid #2b2b2b;
+    transform: rotate(45deg);
+  }
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  .footer__copyright {
+    line-height: 40px;
+    letter-spacing: 1.4px;
+  }
+}
+
+
+// レスポンシブ対応
+
+@media (max-width: 670px) {
+  body {
+    font-size: 14px;
+  }
+
+    // utility
+  .u-content-wrapper {
+    width: calc(100% - 32px);
+    margin: 0 auto;
+  }
+  .u-heading {
+    font-size: 28px;
+  }
+  .u-text {
+    text-align: left;
+    padding-bottom: 32px;
+  }
+  .u-display__pc {
+    display: none;// 改行をなくす。
+  }
+
+  // ヘッダー
+  .header {
+    height: 355px;
+    padding-top: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../image/header.png') 50%;// 50%
+    background-size: cover;
+    .header__nav {
+      position: fixed;
+      top: 0;
+      z-index: 100;
+      .header__nav__wrapper {
+        .header__nav__logo {
+          font-size: 24px;
+        }
+      }
+    }
+    .header-menu {
+      top: 50px;
+      left: 0;
+    }
+    .header__title {
+      padding-top: 120px;
+      font-size: 64px;
+    }
+  }
+
+  // コンセプト
+  .concept {
+    padding: 40px 0;
+    background: linear-gradient(#fff 75%, #ededed 25%);
+  }
+
+  // ワーク
+  .work {
+    padding: 40px 0 24px;
+    .work__contents__wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;//有効でないかも。
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        border-radius: 8px; 
+      }
+      &::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0, .15);
+        border-radius: 8px;
+      }
+      &::-webkit-scrollbar-track {
+        background: rgba(0,0,0, .1);
+        border-radius: 8px;
+      }
+      .work__contents {
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        height: auto;
+        .work__content {
+          width: 80vw;
+          padding-bottom: 40px;
+          &:not(:last-of-type) {
+            margin-right: 24px;
+          }
+          &:nth-of-type(2) {
+            margin-top: 0;
+          }
+          .work__content__image {
+            height: 200px;
+            margin-bottom: 0;
+            object-fit: cover;//綺麗に中央でトリミング。
+          }
+          .work__image__gift {
+            object-position: 0 80%;
+          }
+          .work__image__decoretion {
+            object-position: 0 70%;
+          }
+          .work__image__wedding {
+            object-position: 0 60%;
+          }
+        }
+      }
+    }
+  }
+
+  
+
+  // Florist
+  .florist {
+    padding: 40px 0;
+    background: #ededed 55%;
+    .florist__persons__wrapper {
+      overflow-x: auto;//★横方向にはみ出た部分をスクロールできるようにする。display: flex;と組み合わせる。
+      overflow-y: visible;//必要か？
+      // display: flex;
+      -webkit-overflow-scrolling: touch;// スクロールをなめらかにする。
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        border-radius: 8px;
+      }
+      // スクロールバーのつまみ（動く部分）
+      &::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,.15);
+        border-radius: 8px;
+      }
+      // スクロールバーの背景
+      &::-webkit-scrollbar-track {
+        background: rgba(0,0,0,.1);
+        border-radius: 8px;
+      }
+      .florist__persons {
+        display: inline-flex;// ★ flexじゃだめ。★
+        .florist__person {
+          width: 80vw;
+          &:not(last-of-type) {
+            margin-left: 24px;
+          }
+          .florist__person__image {
+            width: 100%;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+  }
+
+  // shop information
+  .shopInformation {
+    padding: 40px 0;
+    .shopInformation__contents {
+      display: block;// flex解除。
+      .shopInformation__image,
+      .shopInformation__table {
+        width: 100%;
+      }
+    }
+  }
+
+  // contactUs
+  .contactUs {
+    .btn__contact {
+      width: 280px;
+      padding-left: 50px;
+      &::before {
+        left: 45px;
+      }
+      &::after {
+        left: 50px;
+      }
+    }
+  }
+
+
+
+}
+
